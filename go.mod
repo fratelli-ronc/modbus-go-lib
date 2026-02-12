@@ -1,4 +1,4 @@
-module github.com/Fratelli-Ronc/modbus-lib
+module github.com/fratelli-ronc/modbus-lib
 
 go 1.25.6
 
