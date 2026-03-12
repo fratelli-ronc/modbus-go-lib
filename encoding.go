@@ -211,3 +211,13 @@ func decodeBools(quantity uint16, in []byte) (out []bool) {
 
 	return
 }
+
+func byteToBools(b byte) []bool {
+	bits := make([]bool, 8)
+
+	for i := 0; i < 8; i++ {
+		bits[i] = (b & (1 << i)) != 0
+	}
+
+	return bits
+}

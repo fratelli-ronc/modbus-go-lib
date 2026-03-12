@@ -1250,7 +1250,7 @@ func (mc *ModbusClient) readExceptionStatus() (values []bool, err error) {
 		}
 
 		// turn bits into a uint8
-		values = decodeBools(8, res.payload)
+		values = byteToBools(res.payload[0])
 
 	default:
 		err = ErrProtocolError
