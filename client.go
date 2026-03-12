@@ -1239,6 +1239,8 @@ func (mc *ModbusClient) readExceptionStatus() (values []uint16, err error) {
 		return
 	}
 
+	log.Printf("[DEBUG] [modbus-go-lib] res.payload %v", res.payload)
+
 	// validate the response code
 	switch res.functionCode {
 	case req.functionCode:
