@@ -744,8 +744,8 @@ func (mc *ModbusClient) WriteRegisters(addr uint16, values []uint16) (err error)
 }
 
 // Reads exception status (function code 7).
-func (mc *ModbusClient) ReadExceptionStatus() (value uint8, err error) {
-	value, err = mc.readExceptionStatus()
+func (mc *ModbusClient) ReadExceptionStatus() (values []bool, err error) {
+	values, err = mc.readExceptionStatus()
 
 	return
 }
@@ -1216,7 +1216,7 @@ func (mc *ModbusClient) writeRegisters(addr uint16, values []byte) (err error) {
 }
 
 // Reads and returns exception status.
-func (mc *ModbusClient) readExceptionStatus() (value uint8, err error) {
+func (mc *ModbusClient) readExceptionStatus() (values []bool, err error) {
 	var req *pdu
 	var res *pdu
 	var expectedLen int
@@ -1250,7 +1250,7 @@ func (mc *ModbusClient) readExceptionStatus() (value uint8, err error) {
 		}
 
 		// turn bits into a uint8
-		value = bytesToUint8(res.payload)
+		values = decodeBools(8, res.payload)
 
 	default:
 		err = ErrProtocolError

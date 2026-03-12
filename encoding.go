@@ -25,13 +25,6 @@ func uint16sToBytes(endianness Endianness, in []uint16) (out []byte) {
 	return
 }
 
-func bytesToUint8(in []byte) (out uint8) {
-	if len(in) > 0 {
-		out = in[0]
-	}
-	return
-}
-
 func bytesToUint16(endianness Endianness, in []byte) (out uint16) {
 	switch endianness {
 	case BIG_ENDIAN:
