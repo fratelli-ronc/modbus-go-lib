@@ -744,8 +744,8 @@ func (mc *ModbusClient) WriteRegisters(addr uint16, values []uint16) (err error)
 }
 
 // Reads exception status (function code 7).
-func (mc *ModbusClient) ReadExceptionStatus(addr uint16) (values []uint16, err error) {
-	values, err = mc.readExceptionStatus(addr)
+func (mc *ModbusClient) ReadExceptionStatus() (values []uint16, err error) {
+	values, err = mc.readExceptionStatus()
 
 	return
 }
@@ -1216,7 +1216,7 @@ func (mc *ModbusClient) writeRegisters(addr uint16, values []byte) (err error) {
 }
 
 // Reads and returns exception status.
-func (mc *ModbusClient) readExceptionStatus(addr uint16) (values []uint16, err error) {
+func (mc *ModbusClient) readExceptionStatus() (values []uint16, err error) {
 	var req *pdu
 	var res *pdu
 	var expectedLen int
@@ -1231,7 +1231,7 @@ func (mc *ModbusClient) readExceptionStatus(addr uint16) (values []uint16, err e
 	}
 
 	// start address
-	req.payload = uint16ToBytes(BIG_ENDIAN, addr)
+	req.payload = uint16ToBytes(BIG_ENDIAN, AddrReadExceptionStatus)
 
 	// run the request across the transport and wait for a response
 	res, err = mc.executeRequest(req)

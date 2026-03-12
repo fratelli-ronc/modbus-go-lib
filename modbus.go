@@ -37,7 +37,8 @@ const (
 	fcReadFifoQueue              uint8 = 0x18
 
 	// Read exception status
-	fcReadExceptionStatus uint8 = 0x07
+	fcReadExceptionStatus   uint8  = 0x07
+	AddrReadExceptionStatus uint16 = 0x0700
 
 	// file access
 	fcReadFileRecord  uint8 = 0x14
