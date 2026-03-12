@@ -1239,8 +1239,6 @@ func (mc *ModbusClient) readExceptionStatus() (values []uint16, err error) {
 		return
 	}
 
-	log.Printf("[DEBUG] [modbus-go-lib] res.payload %v", res.payload)
-
 	// validate the response code
 	switch res.functionCode {
 	case req.functionCode:
@@ -1252,15 +1250,7 @@ func (mc *ModbusClient) readExceptionStatus() (values []uint16, err error) {
 		}
 
 		// turn bits into a uint16 slice
-		values = bytesToUint16s(mc.endianness, res.payload[1:])
-
-	case req.functionCode | 0x80:
-		if len(res.payload) != 1 {
-			err = ErrProtocolError
-			return
-		}
-
-		err = mapExceptionCodeToError(res.payload[0])
+		values = bytesToUint16s(mc.endianness, res.payload)
 
 	default:
 		err = ErrProtocolError
