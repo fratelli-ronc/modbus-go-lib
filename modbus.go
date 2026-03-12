@@ -36,6 +36,9 @@ const (
 	fcReadWriteMultipleRegisters uint8 = 0x17
 	fcReadFifoQueue              uint8 = 0x18
 
+	// Read exception status
+	fcReadExceptionStatus uint8 = 0x07
+
 	// file access
 	fcReadFileRecord  uint8 = 0x14
 	fcWriteFileRecord uint8 = 0x15
